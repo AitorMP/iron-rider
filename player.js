@@ -4,7 +4,7 @@ class Player {
     this.x = 133;
     this.y = 450;
     this.width = 104;
-    this.height = 95;
+    this.height = 50;
   }
   draw() {
     this.game.context.save();

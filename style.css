@@ -10,8 +10,10 @@ body {
   align-items: center;
   justify-content: center;
   font-family: monospace;
+  background-image: url('/images/city\ background\ 1280\ width\ x\ 768\ height\ px.jpg');
 }
 
 canvas {
   background-color: aquamarine;
+  border: solid 5px rgb(108, 110, 117);
 }
