@@ -8,6 +8,14 @@ class Obstacle {
     this.speed = speed;
   }
 
+checkIntersection (element) {
+  return (element.x + element.width > this.x && 
+    element.x < this.x + this.width && 
+    element.y + element.height > this.y && 
+    element.y < this.y + this.height
+    );
+}
+
   runLogic() {
     this.x -= this.speed;
   }

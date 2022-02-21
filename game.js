@@ -3,9 +3,9 @@ class Game {
     this.canvas = canvasElement;
     this.context = canvasElement.getContext('2d');
     this.player = new Player(this);
-
     this.obstacles = [];
     this.enableControls();
+    this.score = 100;
   }
 
   enableControls() {
@@ -47,6 +47,7 @@ class Game {
       this.runLogic();
       this.draw();
       this.loop();
+      console.log(this.obstacles.length);
     });
   }
 
@@ -57,15 +58,31 @@ class Game {
 
     for (const obstacle of this.obstacles) {
       obstacle.runLogic();
+
+      const obstacleAndPlayerAreIntersecting = obstacle.checkIntersection(
+        this.player
+      );
+      const obstacleIsOutOfBounds = obstacle.x + obstacle.width < 0;
+      if (obstacleAndPlayerAreIntersecting || obstacleIsOutOfBounds) {
+        console.log('Are Intersecting');
+        const IndexOfObstacle = this.obstacles.indexOf(obstacle);
+        this.obstacles.splice(IndexOfObstacle, 1);
+        this.score -= 10;
+      }
     }
+  }
+
+  drawScore() {
+    this.context.font = '50px monospace';
+    this.context.fillText(this.score, 370, 50);
   }
 
   draw() {
     this.context.clearRect(0, 0, 800, 500);
-    this.player.draw();
-
     for (const obstacle of this.obstacles) {
       obstacle.draw();
     }
+    this.player.draw();
+    this.drawScore();
   }
 }
