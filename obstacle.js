@@ -1,3 +1,6 @@
+const obstacleImage = new Image();
+obstacleImage.src = './images/obstacle.png';
+
 class Obstacle {
   constructor(gameInstance, x, y, speed) {
     this.game = gameInstance;
@@ -8,22 +11,31 @@ class Obstacle {
     this.speed = speed;
   }
 
-checkIntersection (element) {
-  return (element.x + element.width > this.x && 
-    element.x < this.x + this.width && 
-    element.y + element.height > this.y && 
-    element.y < this.y + this.height
+  checkIntersection(element) {
+    return (
+      element.x + element.width > this.x &&
+      element.x < this.x + this.width &&
+      element.y + element.height > this.y &&
+      element.y < this.y + this.height
     );
-}
+  }
 
   runLogic() {
     this.x -= this.speed;
   }
 
   draw() {
-    this.game.context.save();
-    this.game.context.fillStyle = 'black';
-    this.game.context.fillRect(this.x, this.y, this.width, this.height);
-    this.game.context.restore();
+    //this.game.context.save();
+    //this.game.context.fillStyle = 'black';
+
+    //this.game.context.fillRect(this.x, this.y, this.width, this.height);
+    this.game.context.drawImage(
+      obstacleImage,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+    //this.game.context.restore();
   }
 }

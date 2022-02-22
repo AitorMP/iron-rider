@@ -30,8 +30,12 @@ class Game {
           this.player.x -= 10;
           break;
       }
+      this.player.x = Clamp(this.player.x, 0, this.canvas.width - this.player.width);
+      this.player.y = Clamp(this.player.y, 300, this.canvas.height - this.player.height);
     });
   }
+
+  
 
   generateObstacle() {
     let yPositions = [470, 440, 410, 380, 350, 310];
@@ -62,8 +66,14 @@ class Game {
       const obstacleAndPlayerAreIntersecting = obstacle.checkIntersection(
         this.player
       );
-      const obstacleIsOutOfBounds = obstacle.x + obstacle.width < 0;
-      if (obstacleAndPlayerAreIntersecting || obstacleIsOutOfBounds) {
+
+      const obstacleOutOfBounds = obstacle.x < 0;
+      if (obstacleOutOfBounds) {
+        console.log('out of bounds');
+        const IndexOfObstacle = this.obstacles.indexOf(obstacle);
+        this.obstacles.splice(IndexOfObstacle, 1);
+      }
+      if (obstacleAndPlayerAreIntersecting) {
         console.log('Are Intersecting');
         const IndexOfObstacle = this.obstacles.indexOf(obstacle);
         this.obstacles.splice(IndexOfObstacle, 1);
@@ -85,4 +95,7 @@ class Game {
     this.player.draw();
     this.drawScore();
   }
+}
+function Clamp(n, min, max) {
+  return Math.min(Math.max(n, min), max);
 }
