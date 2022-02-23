@@ -6,6 +6,8 @@ class Game {
     this.obstacles = [];
     this.enableControls();
     this.score = 100;
+
+    this.background = new Background(this);
   }
 
   enableControls() {
@@ -31,14 +33,14 @@ class Game {
           break;
       }
       this.player.x = Clamp(this.player.x, 0, this.canvas.width - this.player.width);
-      this.player.y = Clamp(this.player.y, 300, this.canvas.height - this.player.height);
+      this.player.y = Clamp(this.player.y, 379, this.canvas.height - this.player.height);
     });
   }
 
   
 
   generateObstacle() {
-    let yPositions = [470, 440, 410, 380, 350, 310];
+    let yPositions = [470, 440, 420];
     const obstacleSpeed = Math.random() + 4;
     const obstacleY = yPositions[Math.floor(Math.random() * yPositions.length)];
     const obstacleX = this.canvas.width;
@@ -88,7 +90,9 @@ class Game {
   }
 
   draw() {
+    
     this.context.clearRect(0, 0, 800, 500);
+    this.background.paint();
     for (const obstacle of this.obstacles) {
       obstacle.draw();
     }

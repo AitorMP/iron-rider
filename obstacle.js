@@ -16,7 +16,7 @@ class Obstacle {
       element.x + element.width > this.x &&
       element.x < this.x + this.width &&
       element.y + element.height > this.y &&
-      element.y < this.y + this.height
+      element.y + element.height / 2  < this.y + this.height
     );
   }
 
@@ -25,10 +25,7 @@ class Obstacle {
   }
 
   draw() {
-    //this.game.context.save();
-    //this.game.context.fillStyle = 'black';
-
-    //this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      
     this.game.context.drawImage(
       obstacleImage,
       this.x,
@@ -36,6 +33,6 @@ class Obstacle {
       this.width,
       this.height
     );
-    //this.game.context.restore();
+   
   }
 }
