@@ -4,9 +4,9 @@ body {
 }
 
 h1 {
+  font-size: 4em;
   color: white;
-  display:flex
-  
+  display: flex;
 }
 
 body {
@@ -24,7 +24,6 @@ body {
 }
 
 .screen {
-
   background-color: midnightblue;
   width: 800px;
   height: 500px;
@@ -35,7 +34,6 @@ body {
 }
 
 canvas {
- 
   border: solid 5px rgb(108, 110, 117);
 }
 

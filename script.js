@@ -7,6 +7,8 @@ const endScreenElement = document.getElementById('game-over-screen');
 const startButton = startScreenElement.querySelector('button');
 const tryAgainButton = endScreenElement.querySelector('button');
 
+
+
 const screenElements = {
   start: startScreenElement,
   playing: playingScreenElement,
@@ -16,10 +18,12 @@ const screenElements = {
 const game = new Game(canvasElement, screenElements);
 
 startButton.addEventListener('click', () => {
+  game.backGroundMusic.play();
   game.startGame();
 });
 
 tryAgainButton.addEventListener('click', () => {
+  game.backGroundMusic.play();
   game.startGame();
 });
 

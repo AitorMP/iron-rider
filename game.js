@@ -5,6 +5,8 @@ class Game {
     this.background = new Background(this);
     this.screens = screens;
     this.running = false;
+    this.backGroundMusic = new Audio("/images/cyberpunk-street.wav");
+    this.backGroundMusic.loop = true;
   }
 
   startGame() {
@@ -27,6 +29,8 @@ class Game {
   gameOver() {
     this.running = false;
     this.displayScreen('end');
+    this.backGroundMusic.pause();
+    this.backGroundMusic.src = "/images/cyberpunk-street.wav";
   }
 
   enableControls() {
