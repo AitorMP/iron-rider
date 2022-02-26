@@ -1,47 +1,74 @@
 class Game {
-  constructor(canvasElement) {
+  constructor(canvasElement, screens) {
     this.canvas = canvasElement;
     this.context = canvasElement.getContext('2d');
+    this.background = new Background(this);
+    this.screens = screens;
+    this.running = false;
+  }
+
+  startGame() {
+    this.running = true;
+    this.score = 100;
     this.player = new Player(this);
     this.obstacles = [];
     this.enableControls();
-    this.score = 100;
+    this.loop();
+    this.displayScreen('playing');
+  }
 
-    this.background = new Background(this);
+  displayScreen(name) {
+    for (let screenName in this.screens) {
+      this.screens[screenName].style.display = 'none';
+    }
+    this.screens[name].style.display = '';
+  }
+
+  gameOver() {
+    this.running = false;
+    this.displayScreen('end');
   }
 
   enableControls() {
     window.addEventListener('keydown', (event) => {
-      const code = event.code;
-      console.log(code);
-      switch (code) {
-        case 'ArrowUp':
-          event.preventDefault();
-          this.player.y -= 10;
-          break;
-        case 'ArrowDown':
-          event.preventDefault();
-          this.player.y += 10;
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          this.player.x += 10;
-          break;
-        case 'ArrowLeft':
-          event.preventDefault();
-          this.player.x -= 10;
-          break;
+      if (this.running) {
+        const code = event.code;
+        console.log(code);
+        switch (code) {
+          case 'ArrowUp':
+            event.preventDefault();
+            this.player.y -= 10;
+            break;
+          case 'ArrowDown':
+            event.preventDefault();
+            this.player.y += 10;
+            break;
+          case 'ArrowRight':
+            event.preventDefault();
+            this.player.x += 10;
+            break;
+          case 'ArrowLeft':
+            event.preventDefault();
+            this.player.x -= 10;
+            break;
+        }
+        this.player.x = Clamp(
+          this.player.x,
+          0,
+          this.canvas.width - this.player.width
+        );
+        this.player.y = Clamp(
+          this.player.y,
+          379,
+          this.canvas.height - this.player.height
+        );
       }
-      this.player.x = Clamp(this.player.x, 0, this.canvas.width - this.player.width);
-      this.player.y = Clamp(this.player.y, 379, this.canvas.height - this.player.height);
     });
   }
 
-  
-
   generateObstacle() {
     let yPositions = [470, 440, 420];
-    const obstacleSpeed = Math.random() + 4;
+    const obstacleSpeed = Math.random() + 2;
     const obstacleY = yPositions[Math.floor(Math.random() * yPositions.length)];
     const obstacleX = this.canvas.width;
     const obstacle = new Obstacle(this, obstacleX, obstacleY, obstacleSpeed);
@@ -52,8 +79,9 @@ class Game {
     window.requestAnimationFrame(() => {
       this.runLogic();
       this.draw();
-      this.loop();
-      console.log(this.obstacles.length);
+      if (this.running) {
+        this.loop();
+      }
     });
   }
 
@@ -82,6 +110,10 @@ class Game {
         this.score -= 10;
       }
     }
+
+    if (this.score <= 0) {
+      this.gameOver();
+    }
   }
 
   drawScore() {
@@ -90,7 +122,6 @@ class Game {
   }
 
   draw() {
-    
     this.context.clearRect(0, 0, 800, 500);
     this.background.paint();
     for (const obstacle of this.obstacles) {

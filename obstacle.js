@@ -15,8 +15,8 @@ class Obstacle {
     return (
       element.x + element.width > this.x &&
       element.x < this.x + this.width &&
-      element.y + element.height > this.y &&
-      element.y + element.height / 2  < this.y + this.height
+      element.y + element.height > this.y + this.height / 2 &&
+      element.y + element.height * 0.7 < this.y + this.height
     );
   }
 
@@ -25,7 +25,6 @@ class Obstacle {
   }
 
   draw() {
-      
     this.game.context.drawImage(
       obstacleImage,
       this.x,
@@ -33,6 +32,5 @@ class Obstacle {
       this.width,
       this.height
     );
-   
   }
 }

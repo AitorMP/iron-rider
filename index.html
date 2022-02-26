@@ -7,14 +7,25 @@
     <title>Iron Rider</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
+  <h1>IRON RIDER</h1>
+  
   <body>
-      
-    <canvas width="800" height="500"></canvas>
+    <div class="screen" id="start-screen">
+     
+      <button> Start Game</button>
+    </div>
+    <div class="screen" id="playing-screen" style="display: none;">
+      <canvas width="800" height="500"></canvas>
+    </div>
+    <div class="screen" id="game-over-screen" style="display: none;">
+      <h1>GAME OVER</h1>
+      <button>Try Again</button>
+    </div>
+
     <script src="background.js"></script>
     <script src="game.js"></script>
-    <script src="obstacle.js"></script> 
+    <script src="obstacle.js"></script>
     <script src="player.js"></script>
     <script src="script.js"></script>
-    
   </body>
 </html>

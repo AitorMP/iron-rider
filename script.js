@@ -1,14 +1,29 @@
 const canvasElement = document.querySelector('canvas');
 
-const game = new Game(canvasElement);
+const startScreenElement = document.getElementById('start-screen');
+const playingScreenElement = document.getElementById('playing-screen');
+const endScreenElement = document.getElementById('game-over-screen');
 
-game.draw();
+const startButton = startScreenElement.querySelector('button');
+const tryAgainButton = endScreenElement.querySelector('button');
 
-console.log(game.player.x);
+const screenElements = {
+  start: startScreenElement,
+  playing: playingScreenElement,
+  end: endScreenElement
+};
+
+const game = new Game(canvasElement, screenElements);
+
+startButton.addEventListener('click', () => {
+  game.startGame();
+});
+
+tryAgainButton.addEventListener('click', () => {
+  game.startGame();
+});
 
 game.runLogic();
-
-console.log(game.player.x);
 
 game.draw();
 
