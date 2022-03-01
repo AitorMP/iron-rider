@@ -3,15 +3,14 @@ body {
   height: 100%;
 }
 
-h1 {
-  font-size: 4em;
-  color: white;
-  display: flex;
+#header {
+  width: auto;
+  height: 150px;
 }
 
 body {
   margin: 0;
-  background-color: midnightblue;
+  background-color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +18,8 @@ body {
   justify-content: center;
   font-family: monospace;
   background-image: url('/images/city\ background\ 1280\ width\ x\ 768\ height\ px.jpg');
-  padding: 2em;
+  background-size: 100%;
+  background-repeat: no-repeat;
   font-size: large;
 }
 
