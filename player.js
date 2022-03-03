@@ -9,8 +9,16 @@ class Player {
     this.width = 106;
     this.height = 61;
     this.frame = 1;
+    this.score = 0;
+    this.lastTime = 0;
+    this.metersPerSecond = 0.1;
   }
-  draw() {
+  draw(stamp) {
+    if (!this.lastTime || stamp - this.lastTime >= this.metersPerSecond * 1000 ){
+      this.lastTime = stamp;
+      this.score++;
+      console.log (this.score);
+    }
     this.frame++;
     this.game.context.save();
     console.log(this.y);

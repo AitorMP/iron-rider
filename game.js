@@ -1,3 +1,5 @@
+const backGroundMusic = new Audio('/images/cyberpunk-street.wav');
+
 class Game {
   constructor(canvasElement, screens) {
     this.canvas = canvasElement;
@@ -5,17 +7,21 @@ class Game {
     this.background = new Background(this);
     this.screens = screens;
     this.running = false;
-    this.backGroundMusic = new Audio('/images/cyberpunk-street.wav');
+    this.backGroundMusic = backGroundMusic;
     this.backGroundMusic.volume = 0.1;
     this.backGroundMusic.loop = true;
+    this.scoreSpritesObj = {};
+    this.score = 3;
+    this.liveSprite = new Image();
+    this.liveSprite.src = './images/live 40px.png';
+    this.enableControls();
   }
 
   startGame() {
     this.running = true;
-    this.score = 100;
+    this.score = 3;
     this.player = new Player(this);
     this.obstacles = [];
-    this.enableControls();
     this.loop();
     this.displayScreen('playing');
   }
@@ -31,7 +37,6 @@ class Game {
     this.running = false;
     this.displayScreen('end');
     this.backGroundMusic.pause();
-    this.backGroundMusic.src = '/images/cyberpunk-street.wav';
   }
 
   enableControls() {
@@ -57,12 +62,12 @@ class Game {
             this.player.x -= 10;
             break;
         }
-        this.player.x = Clamp(
+        this.player.x = clamp(
           this.player.x,
           0,
           this.canvas.width - this.player.width
         );
-        this.player.y = Clamp(
+        this.player.y = clamp(
           this.player.y,
           379,
           this.canvas.height - this.player.height
@@ -80,12 +85,12 @@ class Game {
     this.obstacles.push(obstacle);
   }
 
-  loop() {
-    window.requestAnimationFrame(() => {
+  loop(stamp) {
+    window.requestAnimationFrame((stamp) => {
       this.runLogic();
-      this.draw();
+      this.draw(stamp);
       if (this.running) {
-        this.loop();
+        this.loop(stamp);
       }
     });
   }
@@ -104,15 +109,15 @@ class Game {
 
       const obstacleOutOfBounds = obstacle.x < 0;
       if (obstacleOutOfBounds) {
-        console.log('out of bounds');
-        const IndexOfObstacle = this.obstacles.indexOf(obstacle);
-        this.obstacles.splice(IndexOfObstacle, 1);
+        //console.log('out of bounds');
+        const indexOfObstacle = this.obstacles.indexOf(obstacle);
+        this.obstacles.splice(indexOfObstacle, 1);
       }
       if (obstacleAndPlayerAreIntersecting) {
-        console.log('Are Intersecting');
-        const IndexOfObstacle = this.obstacles.indexOf(obstacle);
-        this.obstacles.splice(IndexOfObstacle, 1);
-        this.score -= 10;
+        //console.log('Are Intersecting');
+        const indexOfObstacle = this.obstacles.indexOf(obstacle);
+        this.obstacles.splice(indexOfObstacle, 1);
+        this.score -= 1;
       }
     }
 
@@ -122,20 +127,27 @@ class Game {
   }
 
   drawScore() {
-    this.context.font = '50px monospace';
-    this.context.fillText(this.score, 370, 50);
+    this.context.fillStyle = 'white';
+    this.context.font = '20px sans-serif';
+    this.context.fillText(`Meters: ${this.player.score}`, 680, 20);
   }
 
-  draw() {
+  draw(stamp) {
     this.context.clearRect(0, 0, 800, 500);
     this.background.paint();
     for (const obstacle of this.obstacles) {
       obstacle.draw();
     }
-    this.player.draw();
+    this.player.draw(stamp);
     this.drawScore();
+    for (let i = 0; i < this.score; i++) {
+      this.context.drawImage(this.liveSprite, 10 + i * 40, 0, 40, 40);
+    }
+
+    //this.context.drawImage(this.scoreSpritesObj[this.score.toString()],20, 50, 120, 40);
   }
 }
-function Clamp(n, min, max) {
+
+function clamp(n, min, max) {
   return Math.min(Math.max(n, min), max);
 }

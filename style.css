@@ -8,6 +8,10 @@ body {
   height: 150px;
 }
 
+h1 {
+  color: white;
+}
+
 body {
   margin: 0;
   background-color: black;
@@ -41,4 +45,13 @@ button {
   font: inherit;
   border: 0;
   padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+foot {
+  font-family: sans-serif;
+  color: aqua;
 }
