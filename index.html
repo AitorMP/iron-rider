@@ -7,37 +7,54 @@
     <title>Iron Rider</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
-  <div id="header">
+  <div class="header">
     <img src="./images/Title.PNG" alt=" IRON RIDER" />
     <!-- <h1>IRON RIDER</h1> -->
   </div>
 
   <body>
-    <div class="screen" id="start-screen">
-      <button>Start Game</button>
+    <div class="main-section">
+      <div class="introduction">
+        <h3>INTRODUCTION</h3>
+        <p>The year is 2077.<br/></p> 
+          You were enjoying a swim in the pool and remebered that you left your futuristic stove on</p><br/>
+          Now you have to run butt-naked back to your place through the worst road in the city <p></p><br>
+        Avoid the rocks on the road trying to reach your place before it blows up! </p>
+      </div>
+      <div class="game-screen">
+        <div class="screen" id="start-screen">
+          <button>Start Game</button>
+        </div>
+        <div class="screen" id="playing-screen" style="display: none">
+          <canvas width="800" height="500"></canvas>
+        </div>
+        <div class="screen" id="game-over-screen" style="display: none">
+          <!--<h1>GAME OVER</h1>-->
+          <img src="./images/game-over.png" alt="GAME OVER" />
+          <button>Try Again</button>
+        </div>
+      </div>
+      <div class="controls">
+        <h3>CONTROLS</h3>
+        <P>Use the arrow keys to move the character up, down, right or/and left</P>
+        <img src="./images/arrow-keys-sprite 2.png">
+        
+      </div>
     </div>
-    <div class="screen" id="playing-screen" style="display: none">
-      <canvas width="800" height="500"></canvas>
-    </div>
-    <div class="screen" id="game-over-screen" style="display: none">
-      <!--<h1>GAME OVER</h1>-->
-      <img src="./images/game-over.png" />
-      <button>Try Again</button>
-    </div>
+
+    <footer>
+      <H3>Special mentions</H3>
+      <p> Artwork created by Luis Zuno (@ansimuz) Twitter @ansimuz<br>
+      Original Idea by Bella Wallis<br>
+      Created by Aitor Martinez Pons<br>
+      IronHack FEB 2022</p>
+      
+    </footer>
 
     <script src="background.js"></script>
     <script src="game.js"></script>
     <script src="obstacle.js"></script>
     <script src="player.js"></script>
     <script src="script.js"></script>
-
-    <foot>
-      <p>
-        You just remebered that you left your futuristic stove on<br />
-        Avoid the rocks on the road trying to reach your place before it blows
-        up <br />
-        Use the arrow keys to move the character up, down, right or/and left
-      </p>
-    </foot>
   </body>
 </html>

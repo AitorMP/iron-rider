@@ -1,15 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter&family=Inter&family=Russo+One&display=swap');
+
 html,
 body {
   height: 100%;
 }
 
-#header {
+.header {
   width: auto;
   height: 150px;
-}
-
-h1 {
-  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 body {
@@ -27,19 +30,29 @@ body {
   font-size: large;
 }
 
-.screen {
-  background-color: midnightblue;
-  width: 800px;
-  height: 500px;
+.main-section {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
 }
 
 canvas {
   border: solid 5px rgb(108, 110, 117);
 }
+
+.screen {
+  margin: 10px, 100px;
+  background-color: midnightblue;
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 button {
   font: inherit;
@@ -51,7 +64,40 @@ button {
   align-items: center;
 }
 
-foot {
-  font-family: sans-serif;
-  color: aqua;
+footer {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Russo One', sans-serif;
+  font-size: small;
+  color: yellow;
+  margin: 0;
+  padding: 0;
+}
+
+.introduction {
+  color: yellow;
+  float: left;
+  width: 20%;
+  font-family: 'Russo One', sans-serif;
+  font-size: medium;
+  /*display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;*/
+}
+
+.controls {
+  color: yellow;
+  float: left;
+  width: 20%;
+  font-family: 'Russo One', sans-serif;
+  font-size: medium;
+  /*display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;*/
 }
