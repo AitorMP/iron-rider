@@ -52,8 +52,6 @@ canvas {
   align-items: center;
 }
 
-
-
 button {
   font: inherit;
   border: 0;
@@ -62,6 +60,7 @@ button {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: absolute;
 }
 
 footer {
